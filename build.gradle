@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+}
+
+group 'org.altera'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.8.2'
+    commonsIO = '2.11.0'
+    commonsLang3 = '3.12.0'
+    commonsDBCP2 = '2.9.0'
+    typesafe = '1.4.2'
+    mariadbJavaClient = '3.0.5'
+    slf4jVersion = '1.7.36'
+    log4jVersion = '2.17.2'
+}
+
+dependencies {
+
+    // common
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: "$commonsLang3"
+    implementation group: 'commons-io', name: 'commons-io', version: "$commonsIO"
+    implementation group: 'com.typesafe', name: 'config', version: "$typesafe"
+
+    // junit
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+
+    // DB
+    implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: "$commonsDBCP2"
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: "$mariadbJavaClient"
+
+    // logging
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: "$slf4jVersion"
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "$log4jVersion"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$log4jVersion"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "$log4jVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
